@@ -1,0 +1,48 @@
+{
+  "analysis_summary": {
+    "topic_context": "next topic",
+    "topic_instruction": "next_topic",
+    "analysis_timestamp": "2025-07-17T19:30:27.003782"
+  },
+  "learner_profile": {
+    "category": "Stable Expert",
+    "category_prompt": "Generate concise, expert-level content for the next topic. Focus on advanced applications and cutting-edge concepts. Minimal guidance needed - encourage innovation.",
+    "confidence_score": 1.0,
+    "redo_topics_flag": false,
+    "input_data": {
+      "avg_objective_score": 8.5,
+      "avg_confidence_score": 0.75,
+      "learner_level": "advanced",
+      "learner_purpose": "exploratory",
+      "redo_topics": 0
+    }
+  },
+  "topic_revisit_analysis": {
+    "revisit_needed": false,
+    "confidence_score": 1.0,
+    "reasoning": "Based on avg_objective_score and redo_topics count"
+  },
+  "strategy_recommendation": {
+    "strategy_label": "Video Focused Learner",
+    "strategy_prompt": "Long-format instructional videos for new content. Mid-video Q&A checkpoints.",
+    "confidence_score": 1.0,
+    "user_description": "Progressing | Session: Long Sessions | Attention: High (>=11 min) | Format: Video",
+    "input_parameters": {
+      "revisiting_module": false,
+      "session_preference": "long_sessions",
+      "attention_span": 20.0,
+      "format_preference": "video"
+    }
+  },
+  "combined_output": {
+    "final_prompt": "NEXT TOPIC (New Material): Ready to progress\n\nCONTEXT: This learner is ready to progress to the next topic in their learning path.\n\nLEARNER PROFILE: Generate concise, expert-level content for the next topic. Focus on advanced applications and cutting-edge concepts. Minimal guidance needed - encourage innovation.\n\nDELIVERY STRATEGY: Long-format instructional videos for new content. Mid-video Q&A checkpoints.\n\nIMPORTANT: Introduce new concepts for the next topic in their learning sequence. Ensure prerequisites are met before advancing to new material.\n\nFINAL INSTRUCTION: Create personalized learning content by combining the learner profile guidance with the delivery strategy, keeping the topic context in mind.",
+    "teaching_approach": {
+      "learner_type": "Stable Expert",
+      "delivery_method": "Video Focused Learner",
+      "content_focus": "New concept introduction",
+      "pacing": "Fast with minimal guidance",
+      "support_level": "Minimal support with innovation focus",
+      "challenge_level": "Very high with cutting-edge content"
+    }
+  }
+}

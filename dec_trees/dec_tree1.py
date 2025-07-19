@@ -3,6 +3,7 @@ from sklearn.tree import DecisionTreeClassifier, export_graphviz
 from sklearn.preprocessing import LabelEncoder
 import graphviz
 import html
+import pickle
 
 # === 1. Define your decision logic categories (from the CART rules you finalized) ===
 
@@ -62,3 +63,57 @@ dot_data = export_graphviz(
 
 graph = graphviz.Source(dot_data)
 graph.render("learner_decision_tree", format="png", view=True)  # Saves and opens learner_decision_tree.png
+
+# === 6. Function to predict category for a new learner ===
+def predict_learner_category(new_data):
+    # Create DataFrame with a single row
+    input_df = pd.DataFrame([new_data])
+    
+    # Encode categorical variables just like we did for training data
+    if 'learner_level' in input_df.columns:
+        input_df['learner_level_encoded'] = le_level.transform(input_df['learner_level'])
+    
+    if 'learner_purpose' in input_df.columns:
+        input_df['learner_purpose_encoded'] = le_purpose.transform(input_df['learner_purpose'])
+    
+    # Extract features in the same order used for training
+    X_input = input_df[features]
+    
+    # Make prediction
+    predicted_category_encoded = model.predict(X_input)[0]
+    
+    # Convert encoded prediction back to category name
+    predicted_category = le_category.inverse_transform([predicted_category_encoded])[0]
+    
+    return predicted_category
+
+# Example usage - replace this with your actual input data
+new_learner = {
+    'avg_objective_score': 6.2, 
+    'avg_confidence_score': 0.5, 
+    'confidence_trend': 0.05, 
+    'avg_skill_score': 4.8, 
+    'learner_level': 'intermediate', 
+    'learner_purpose': 'exploratory', 
+    'flagged_topics': 1, 
+    'redo_topics': 0, 
+    'stddev_objective_score': 0.4
+}
+
+# Get the prediction
+predicted_category = predict_learner_category(new_learner)
+print(f"Predicted learner category: {predicted_category}")
+
+# Save the trained model to a file
+with open("learner_decision_tree_model.pkl", "wb") as model_file:
+    pickle.dump(model, model_file)
+
+# Save the encoders to files
+with open("learner_level_encoder.pkl", "wb") as level_encoder_file:
+    pickle.dump(le_level, level_encoder_file)
+
+with open("learner_purpose_encoder.pkl", "wb") as purpose_encoder_file:
+    pickle.dump(le_purpose, purpose_encoder_file)
+
+with open("learner_category_encoder.pkl", "wb") as category_encoder_file:
+    pickle.dump(le_category, category_encoder_file)

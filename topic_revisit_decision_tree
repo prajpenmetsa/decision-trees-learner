@@ -1,0 +1,13 @@
+digraph Tree {
+node [shape=box, style="filled, rounded", color="black", fontname="helvetica"] ;
+edge [fontname="helvetica"] ;
+0 [label=<avg_objective_score &le; 6.4<br/>gini = 0.5<br/>samples = 10<br/>value = [5, 5]<br/>class = No Revisit>, fillcolor="#ffffff"] ;
+1 [label=<gini = 0.0<br/>samples = 4<br/>value = [0, 4]<br/>class = Revisit>, fillcolor="#399de5"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label=<redo_topics &le; 2.5<br/>gini = 0.278<br/>samples = 6<br/>value = [5, 1]<br/>class = No Revisit>, fillcolor="#ea9a61"] ;
+0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+3 [label=<gini = 0.0<br/>samples = 5<br/>value = [5, 0]<br/>class = No Revisit>, fillcolor="#e58139"] ;
+2 -> 3 ;
+4 [label=<gini = 0.0<br/>samples = 1<br/>value = [0, 1]<br/>class = Revisit>, fillcolor="#399de5"] ;
+2 -> 4 ;
+}
