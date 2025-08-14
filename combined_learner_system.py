@@ -73,10 +73,23 @@ class CombinedLearnerSystem:
         Returns:
             dict: Combined results from all three models in JSON format
         """
-        # 1. Predict topic revisit first (using avg_objective_score and redo_topics from learner_data)
+        # 1. Extract topic lists and counts
+        flagged_topics = learner_data.get('flagged_topics', [])
+        redo_topics = learner_data.get('redo_topics', [])
+        
+        # Convert to counts for the prediction models (backward compatibility)
+        redo_topics_count = len(redo_topics) if isinstance(redo_topics, list) else redo_topics
+        flagged_topics_count = len(flagged_topics) if isinstance(flagged_topics, list) else flagged_topics
+        
+        # Identify critical topics (appearing in both lists)
+        critical_topics = []
+        if isinstance(flagged_topics, list) and isinstance(redo_topics, list):
+            critical_topics = list(set(flagged_topics) & set(redo_topics))
+        
+        # 2. Predict topic revisit first (using avg_objective_score and redo_topics count)
         revisit_result = predict_topic_revisit_with_confidence(
             learner_data['avg_objective_score'], 
-            learner_data['redo_topics']
+            redo_topics_count
         )
         
         # 2. Determine topic context based on revisit result
@@ -114,13 +127,16 @@ class CombinedLearnerSystem:
             strategy_input['format_preference']
         )
         
-        # 7. Combine category and strategy prompts
+        # 7. Combine category and strategy prompts with topic focus
         combined_prompt = self._combine_prompts(
             category_result['prompt'],
             strategy_result['strategy_prompt'],
             revisit_result['revisit_needed'],
             topic_instruction,
-            topic_name if revisit_result['revisit_needed'] else None
+            topic_name if revisit_result['revisit_needed'] else None,
+            flagged_topics,
+            redo_topics,
+            critical_topics
         )
         
         # 8. Create structured JSON output
@@ -140,7 +156,9 @@ class CombinedLearnerSystem:
                     "avg_confidence_score": float(learner_data['avg_confidence_score']),
                     "learner_level": str(learner_data['learner_level']),
                     "learner_purpose": str(learner_data['learner_purpose']),
-                    "redo_topics": int(learner_data['redo_topics'])
+                    "redo_topics": redo_topics if isinstance(redo_topics, list) else int(redo_topics),
+                    "flagged_topics": flagged_topics if isinstance(flagged_topics, list) else int(flagged_topics),
+                    "critical_topics": critical_topics
                 }
             },
             "topic_revisit_analysis": {
@@ -165,7 +183,10 @@ class CombinedLearnerSystem:
                 "teaching_approach": self._get_teaching_approach(
                     category_result['category'],
                     strategy_result['strategy_label'],
-                    revisit_result['revisit_needed']
+                    revisit_result['revisit_needed'],
+                    flagged_topics,
+                    redo_topics,
+                    critical_topics
                 )
             }
         }
@@ -175,10 +196,15 @@ class CombinedLearnerSystem:
         
         return result
     
-    def _combine_prompts(self, category_prompt, strategy_prompt, revisit_needed, topic_instruction, topic_name):
+    def _combine_prompts(self, category_prompt, strategy_prompt, revisit_needed, topic_instruction, topic_name, flagged_topics=None, redo_topics=None, critical_topics=None):
         """
-        Combine category and strategy prompts into a unified prompt.
+        Combine category and strategy prompts into a unified prompt with topic focus.
         """
+        # Ensure topic lists are valid
+        flagged_topics = flagged_topics or []
+        redo_topics = redo_topics or []
+        critical_topics = critical_topics or []
+        
         # Determine topic reference
         if revisit_needed:
             topic_ref = f"CURRENT TOPIC (Revisiting): {topic_name}"
@@ -192,23 +218,55 @@ class CombinedLearnerSystem:
         combined += f"LEARNER PROFILE: {category_prompt}\n\n"
         combined += f"DELIVERY STRATEGY: {strategy_prompt}\n\n"
         
+        # Add topic-specific focus areas
+        if critical_topics:
+            combined += f"🚨 CRITICAL ATTENTION REQUIRED: The following topics appear in BOTH flagged and redo lists, requiring immediate focused intervention:\n"
+            for topic in critical_topics:
+                combined += f"   • {topic} (PRIORITY: Extra reinforcement needed)\n"
+            combined += "\n"
+        
+        if flagged_topics:
+            combined += f"⚠️ FLAGGED TOPICS requiring special attention:\n"
+            for topic in flagged_topics:
+                if topic not in critical_topics:  # Don't repeat critical topics
+                    combined += f"   • {topic}\n"
+            combined += "\n"
+        
+        if redo_topics:
+            combined += f"🔄 REDO TOPICS needing revisitation:\n"
+            for topic in redo_topics:
+                if topic not in critical_topics:  # Don't repeat critical topics
+                    combined += f"   • {topic}\n"
+            combined += "\n"
+        
         if revisit_needed:
             combined += f"IMPORTANT: Focus on reinforcing and clarifying concepts from '{topic_name}'. "
-            combined += "Address gaps in understanding and build stronger foundations before moving forward.\n\n"
+            combined += "Address gaps in understanding and build stronger foundations before moving forward."
+            if flagged_topics or redo_topics:
+                combined += " Pay special attention to the flagged and redo topics listed above."
+            combined += "\n\n"
         else:
             combined += "IMPORTANT: Introduce new concepts for the next topic in their learning sequence. "
-            combined += "Ensure prerequisites are met before advancing to new material.\n\n"
+            combined += "Ensure prerequisites are met before advancing to new material."
+            if flagged_topics or redo_topics:
+                combined += " Before progressing, ensure understanding of the flagged and redo topics listed above."
+            combined += "\n\n"
         
         combined += "FINAL INSTRUCTION: Create personalized learning content by combining the learner "
         combined += "profile guidance with the delivery strategy, keeping the topic context in mind."
         
         return combined
     
-    def _get_teaching_approach(self, category, strategy, revisit_needed):
+    def _get_teaching_approach(self, category, strategy, revisit_needed, flagged_topics=None, redo_topics=None, critical_topics=None):
         """
-        Generate a structured teaching approach summary.
+        Generate a structured teaching approach summary with topic-specific guidance.
         """
-        return {
+        # Ensure topic lists are valid
+        flagged_topics = flagged_topics or []
+        redo_topics = redo_topics or []
+        critical_topics = critical_topics or []
+        
+        approach = {
             "learner_type": str(category),
             "delivery_method": str(strategy),
             "content_focus": "Reinforcement and clarification" if revisit_needed else "New concept introduction",
@@ -216,6 +274,42 @@ class CombinedLearnerSystem:
             "support_level": self._get_support_level(category),
             "challenge_level": self._get_challenge_level(category)
         }
+        
+        # Add topic-specific guidance
+        topic_guidance = []
+        
+        if critical_topics:
+            topic_guidance.append({
+                "priority": "CRITICAL",
+                "topics": critical_topics,
+                "action": "Immediate focused intervention required - these topics appear in both flagged and redo lists",
+                "approach": "Extra reinforcement, multiple explanations, hands-on practice, frequent assessment"
+            })
+        
+        if flagged_topics:
+            non_critical_flagged = [t for t in flagged_topics if t not in critical_topics]
+            if non_critical_flagged:
+                topic_guidance.append({
+                    "priority": "HIGH",
+                    "topics": non_critical_flagged,
+                    "action": "Special attention required - learner struggled with these concepts",
+                    "approach": "Additional examples, alternative explanations, scaffolded practice"
+                })
+        
+        if redo_topics:
+            non_critical_redo = [t for t in redo_topics if t not in critical_topics]
+            if non_critical_redo:
+                topic_guidance.append({
+                    "priority": "MEDIUM",
+                    "topics": non_critical_redo,
+                    "action": "Revisitation needed - concepts require reinforcement",
+                    "approach": "Review, practice, application in new contexts"
+                })
+        
+        if topic_guidance:
+            approach["topic_specific_guidance"] = topic_guidance
+        
+        return approach
     
     def _get_pacing_recommendation(self, category):
         """Get pacing recommendation based on learner category."""
@@ -304,8 +398,8 @@ if __name__ == "__main__":
         'avg_skill_score': 4.5,
         'learner_level': 'intermediate',
         'learner_purpose': 'scratch',
-        'flagged_topics': 2,
-        'redo_topics': 3,
+        'flagged_topics': ['variables', 'loops', 'functions'],
+        'redo_topics': ['loops', 'conditionals', 'data structures'],
         'stddev_objective_score': 0.6
     }
     
@@ -339,8 +433,8 @@ if __name__ == "__main__":
         'avg_skill_score': 6.8,
         'learner_level': 'advanced',
         'learner_purpose': 'exploratory',
-        'flagged_topics': 0,
-        'redo_topics': 0,
+        'flagged_topics': ['neural networks', 'optimization'],
+        'redo_topics': [],
         'stddev_objective_score': 0.1
     }
     

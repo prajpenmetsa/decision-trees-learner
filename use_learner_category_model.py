@@ -18,12 +18,18 @@ def calculate_redo_flag(row):
     score = row['avg_objective_score']
     existing_redo = row['redo_topics']
     
+    # Handle both list and integer formats for backward compatibility
+    if isinstance(existing_redo, list):
+        redo_count = len(existing_redo)
+    else:
+        redo_count = existing_redo
+    
     if score < 5.5:  # Struggling
         return True
     elif 5.5 <= score < 6.5:  # Developing
-        return existing_redo >= 2
+        return redo_count >= 2
     elif 6.5 <= score < 8.0:  # Competent
-        return existing_redo >= 3
+        return redo_count >= 3
     else:  # Expert
         return False
 
@@ -40,16 +46,33 @@ def predict_learner_category(new_data, next_topic="the current topic"):
             - avg_skill_score (float)
             - learner_level (str): 'basic', 'intermediate', 'advanced'
             - learner_purpose (str): 'scratch', 'exploratory', 'revising'
-            - flagged_topics (int)
-            - redo_topics (int)
+            - flagged_topics (list or int): List of flagged topics or count
+            - redo_topics (list or int): List of redo topics or count
             - stddev_objective_score (float)
         next_topic (str): The topic to generate prompt for
     
     Returns:
         dict: Contains category, redo_topics_flag, prompt, and confidence
     """
+    # Convert lists to counts for model compatibility
+    processed_data = new_data.copy()
+    
+    # Handle flagged_topics - convert list to count
+    if isinstance(processed_data.get('flagged_topics'), list):
+        processed_data['flagged_topics'] = len(processed_data['flagged_topics'])
+    
+    # Handle redo_topics - convert list to count  
+    if isinstance(processed_data.get('redo_topics'), list):
+        processed_data['redo_topics'] = len(processed_data['redo_topics'])
+    
+    # Ensure all values are scalar (not lists)
+    for key, value in processed_data.items():
+        if isinstance(value, list):
+            # If any other field is a list, convert to length or first element
+            processed_data[key] = len(value) if value else 0
+    
     # Create DataFrame with a single row
-    input_df = pd.DataFrame([new_data])
+    input_df = pd.DataFrame([processed_data])
     
     # Calculate redo_topics_flag
     input_df['redo_topics_flag'] = input_df.apply(calculate_redo_flag, axis=1)
@@ -74,8 +97,13 @@ def predict_learner_category(new_data, next_topic="the current topic"):
     
     # Add redo context if needed
     redo_flag = input_df['redo_topics_flag'].iloc[0]
-    if redo_flag and new_data.get('redo_topics', 0) > 0:
-        final_prompt += f" Focus on reviewing and reinforcing previous topics that need attention."
+    if redo_flag:
+        # Handle both list and integer formats
+        redo_topics_data = new_data.get('redo_topics', 0)
+        if isinstance(redo_topics_data, list) and len(redo_topics_data) > 0:
+            final_prompt += f" Focus on reviewing and reinforcing previous topics that need attention: {', '.join(redo_topics_data)}."
+        elif isinstance(redo_topics_data, int) and redo_topics_data > 0:
+            final_prompt += f" Focus on reviewing and reinforcing previous topics that need attention."
     
     return {
         'category': predicted_category,

@@ -2,11 +2,11 @@
   "analysis_summary": {
     "topic_context": "current topic: Python object-oriented programming",
     "topic_instruction": "current_topic",
-    "analysis_timestamp": "2025-07-17T19:30:26.991616"
+    "analysis_timestamp": "2025-08-13T15:54:48.673914"
   },
   "learner_profile": {
     "category": "Rising Improver",
-    "category_prompt": "Encourage steady progress in current topic: Python object-oriented programming with moderate challenges. Use supportive feedback and clear progress indicators. Celebrate improvements while maintaining momentum. Focus on reviewing and reinforcing previous topics that need attention.",
+    "category_prompt": "Encourage steady progress in current topic: Python object-oriented programming with moderate challenges. Use supportive feedback and clear progress indicators. Celebrate improvements while maintaining momentum. Focus on reviewing and reinforcing previous topics that need attention: loops, conditionals, data structures.",
     "confidence_score": 1.0,
     "redo_topics_flag": true,
     "input_data": {
@@ -14,7 +14,19 @@
       "avg_confidence_score": 0.45,
       "learner_level": "intermediate",
       "learner_purpose": "scratch",
-      "redo_topics": 3
+      "redo_topics": [
+        "loops",
+        "conditionals",
+        "data structures"
+      ],
+      "flagged_topics": [
+        "variables",
+        "loops",
+        "functions"
+      ],
+      "critical_topics": [
+        "loops"
+      ]
     }
   },
   "topic_revisit_analysis": {
@@ -35,14 +47,42 @@
     }
   },
   "combined_output": {
-    "final_prompt": "CURRENT TOPIC (Revisiting): Python object-oriented programming\n\nCONTEXT: This learner is revisiting 'Python object-oriented programming' - material they've seen before.\n\nLEARNER PROFILE: Encourage steady progress in current topic: Python object-oriented programming with moderate challenges. Use supportive feedback and clear progress indicators. Celebrate improvements while maintaining momentum. Focus on reviewing and reinforcing previous topics that need attention.\n\nDELIVERY STRATEGY: Provide 2–3 min videos per topic with transcripts.\n\nIMPORTANT: Focus on reinforcing and clarifying concepts from 'Python object-oriented programming'. Address gaps in understanding and build stronger foundations before moving forward.\n\nFINAL INSTRUCTION: Create personalized learning content by combining the learner profile guidance with the delivery strategy, keeping the topic context in mind.",
+    "final_prompt": "CURRENT TOPIC (Revisiting): Python object-oriented programming\n\nCONTEXT: This learner is revisiting 'Python object-oriented programming' - material they've seen before.\n\nLEARNER PROFILE: Encourage steady progress in current topic: Python object-oriented programming with moderate challenges. Use supportive feedback and clear progress indicators. Celebrate improvements while maintaining momentum. Focus on reviewing and reinforcing previous topics that need attention: loops, conditionals, data structures.\n\nDELIVERY STRATEGY: Provide 2–3 min videos per topic with transcripts.\n\n🚨 CRITICAL ATTENTION REQUIRED: The following topics appear in BOTH flagged and redo lists, requiring immediate focused intervention:\n   • loops (PRIORITY: Extra reinforcement needed)\n\n⚠️ FLAGGED TOPICS requiring special attention:\n   • variables\n   • functions\n\n🔄 REDO TOPICS needing revisitation:\n   • conditionals\n   • data structures\n\nIMPORTANT: Focus on reinforcing and clarifying concepts from 'Python object-oriented programming'. Address gaps in understanding and build stronger foundations before moving forward. Pay special attention to the flagged and redo topics listed above.\n\nFINAL INSTRUCTION: Create personalized learning content by combining the learner profile guidance with the delivery strategy, keeping the topic context in mind.",
     "teaching_approach": {
       "learner_type": "Rising Improver",
       "delivery_method": "Video Refresher",
       "content_focus": "Reinforcement and clarification",
       "pacing": "Moderate with momentum maintenance",
       "support_level": "Moderate support with progress tracking",
-      "challenge_level": "Moderate with steady advancement"
+      "challenge_level": "Moderate with steady advancement",
+      "topic_specific_guidance": [
+        {
+          "priority": "CRITICAL",
+          "topics": [
+            "loops"
+          ],
+          "action": "Immediate focused intervention required - these topics appear in both flagged and redo lists",
+          "approach": "Extra reinforcement, multiple explanations, hands-on practice, frequent assessment"
+        },
+        {
+          "priority": "HIGH",
+          "topics": [
+            "variables",
+            "functions"
+          ],
+          "action": "Special attention required - learner struggled with these concepts",
+          "approach": "Additional examples, alternative explanations, scaffolded practice"
+        },
+        {
+          "priority": "MEDIUM",
+          "topics": [
+            "conditionals",
+            "data structures"
+          ],
+          "action": "Revisitation needed - concepts require reinforcement",
+          "approach": "Review, practice, application in new contexts"
+        }
+      ]
     }
   }
 }

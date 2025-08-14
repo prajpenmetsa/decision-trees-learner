@@ -2,7 +2,7 @@
   "analysis_summary": {
     "topic_context": "next topic",
     "topic_instruction": "next_topic",
-    "analysis_timestamp": "2025-07-17T19:30:27.003782"
+    "analysis_timestamp": "2025-08-13T15:54:48.711228"
   },
   "learner_profile": {
     "category": "Stable Expert",
@@ -14,7 +14,12 @@
       "avg_confidence_score": 0.75,
       "learner_level": "advanced",
       "learner_purpose": "exploratory",
-      "redo_topics": 0
+      "redo_topics": [],
+      "flagged_topics": [
+        "neural networks",
+        "optimization"
+      ],
+      "critical_topics": []
     }
   },
   "topic_revisit_analysis": {
@@ -35,14 +40,25 @@
     }
   },
   "combined_output": {
-    "final_prompt": "NEXT TOPIC (New Material): Ready to progress\n\nCONTEXT: This learner is ready to progress to the next topic in their learning path.\n\nLEARNER PROFILE: Generate concise, expert-level content for the next topic. Focus on advanced applications and cutting-edge concepts. Minimal guidance needed - encourage innovation.\n\nDELIVERY STRATEGY: Long-format instructional videos for new content. Mid-video Q&A checkpoints.\n\nIMPORTANT: Introduce new concepts for the next topic in their learning sequence. Ensure prerequisites are met before advancing to new material.\n\nFINAL INSTRUCTION: Create personalized learning content by combining the learner profile guidance with the delivery strategy, keeping the topic context in mind.",
+    "final_prompt": "NEXT TOPIC (New Material): Ready to progress\n\nCONTEXT: This learner is ready to progress to the next topic in their learning path.\n\nLEARNER PROFILE: Generate concise, expert-level content for the next topic. Focus on advanced applications and cutting-edge concepts. Minimal guidance needed - encourage innovation.\n\nDELIVERY STRATEGY: Long-format instructional videos for new content. Mid-video Q&A checkpoints.\n\n⚠️ FLAGGED TOPICS requiring special attention:\n   • neural networks\n   • optimization\n\nIMPORTANT: Introduce new concepts for the next topic in their learning sequence. Ensure prerequisites are met before advancing to new material. Before progressing, ensure understanding of the flagged and redo topics listed above.\n\nFINAL INSTRUCTION: Create personalized learning content by combining the learner profile guidance with the delivery strategy, keeping the topic context in mind.",
     "teaching_approach": {
       "learner_type": "Stable Expert",
       "delivery_method": "Video Focused Learner",
       "content_focus": "New concept introduction",
       "pacing": "Fast with minimal guidance",
       "support_level": "Minimal support with innovation focus",
-      "challenge_level": "Very high with cutting-edge content"
+      "challenge_level": "Very high with cutting-edge content",
+      "topic_specific_guidance": [
+        {
+          "priority": "HIGH",
+          "topics": [
+            "neural networks",
+            "optimization"
+          ],
+          "action": "Special attention required - learner struggled with these concepts",
+          "approach": "Additional examples, alternative explanations, scaffolded practice"
+        }
+      ]
     }
   }
 }
