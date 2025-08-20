@@ -1,0 +1,87 @@
+[
+  {
+    "user_id": "U001",
+    "user_category": [
+      "Perfect Alignment",
+      "Advanced content, accelerated pace, challenge problems",
+      1.0
+    ],
+    "redo_decision": {
+      "decision": "NO",
+      "confidence": 1.0
+    },
+    "learning_intervention": {
+      "intervention": "Extended Examples",
+      "confidence": 1.0,
+      "description": "Extended examples, case studies for fast learners preferring long sessions"
+    }
+  },
+  {
+    "user_id": "U002",
+    "user_category": [
+      "Slow Starter",
+      "Patience, building momentum, progressive difficulty",
+      1.0
+    ],
+    "redo_decision": {
+      "decision": "NO",
+      "confidence": 1.0
+    },
+    "learning_intervention": {
+      "intervention": "Alternative Explanations",
+      "confidence": 1.0,
+      "description": "Alternative explanations, step-by-step breakdown for quick struggling (overridden to long)"
+    }
+  },
+  {
+    "user_id": "U003",
+    "user_category": [
+      "Slow but Steady",
+      "Patient progression, encouragement, extended timelines",
+      1.0
+    ],
+    "redo_decision": {
+      "decision": "YES",
+      "confidence": 1.0
+    },
+    "learning_intervention": {
+      "intervention": "Micro-learning",
+      "confidence": 1.0,
+      "description": "Micro-learning, essential concepts only for critical struggling short sessions"
+    }
+  },
+  {
+    "user_id": "U004",
+    "user_category": [
+      "Slow Starter",
+      "Patience, building momentum, progressive difficulty",
+      1.0
+    ],
+    "redo_decision": {
+      "decision": "NO",
+      "confidence": 1.0
+    },
+    "learning_intervention": {
+      "intervention": "Multi-modal Support",
+      "confidence": 0.75,
+      "description": "Multi-modal extensive support, confidence rebuilding for slow revisiting long sessions"
+    }
+  },
+  {
+    "user_id": "U005",
+    "user_category": [
+      "Slow but Steady",
+      "Patient progression, encouragement, extended timelines",
+      1.0
+    ],
+    "redo_decision": {
+      "decision": "YES",
+      "confidence": 1.0
+    },
+    "learning_intervention": {
+      "intervention": "Micro-learning",
+      "confidence": 1.0,
+      "description": "Micro-learning, essential concepts only for critical struggling short sessions"
+    }
+  }
+]
