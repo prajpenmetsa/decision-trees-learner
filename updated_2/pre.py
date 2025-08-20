@@ -99,11 +99,47 @@ class DecisionTreePreprocessor:
             input_data.get("time_module", [])
         )
 
-        redo_topics = input_data.get("redo_topics", [])
-        flagged_topics = input_data.get("flagged_topics", [])
-        redo_topics_count = len(redo_topics)
-        flagged_topics_count = len(flagged_topics)
+        # Use topics_covered for all topic-based calculations
+        topics_covered = input_data.get("topics_covered", [])
+        obj_scores = input_data.get("objective_scores", [])
+        conf_scores = input_data.get("confidence_scores", [])
         
+        # Calculate dynamic threshold using 25th percentile (bottom quartile)
+        # This ensures only the lowest performing topics are marked for redo
+        all_scores = obj_scores + conf_scores
+        if all_scores and len(all_scores) >= 4:
+            # Use 25th percentile as threshold for robust adaptation
+            sorted_scores = sorted(all_scores)
+            threshold = statistics.quantiles(sorted_scores, n=4)[0]
+        elif all_scores:
+            # Fallback for small datasets: mean - 0.5 * std_dev
+            mean_score = statistics.mean(all_scores)
+            std_score = statistics.stdev(all_scores) if len(all_scores) > 1 else 0.1
+            threshold = mean_score - (std_score * 0.5)
+            threshold = max(threshold, 0.3)  # Prevent threshold from being too low
+        else:
+            threshold = 0.5
+
+        # Consider both objective and confidence scores with weights
+        redo_topics = []
+        for idx, topic in enumerate(topics_covered):
+            if idx < len(obj_scores) and idx < len(conf_scores):
+                # Weighted score (60% objective, 40% confidence)
+                weighted_score = (obj_scores[idx] * 0.7) + (conf_scores[idx] * 0.3)
+                
+                # Dynamic threshold based on user's average performance
+                avg_performance = (avg_obj_score + avg_conf_score) / 2
+                if avg_performance >= 0.7:
+                    topic_threshold = avg_performance - 0.2
+                else:
+                    topic_threshold = avg_performance - 0.15
+                    
+                if weighted_score < topic_threshold:
+                    redo_topics.append(topic)
+
+        flagged_topics = input_data.get("flagged_topics", [])
+        flagged_topics_count = len(flagged_topics)
+
         # Output processed features
         processed_features = {
             "module_id": input_data.get("module_id", ""),
@@ -111,7 +147,7 @@ class DecisionTreePreprocessor:
             "avg_obj_score": round(avg_obj_score, 3),
             "avg_conf_score": round(avg_conf_score, 3),
             "conf_trend": round(conf_trend, 3),
-            "redo_topics_count": redo_topics_count,
+            "redo_topics_count": len(redo_topics),
             "flagged_topics_count": flagged_topics_count,
             "redo_topics": redo_topics,
             "flagged_topics": flagged_topics,
@@ -146,10 +182,10 @@ def main():
     sample_input = {
         "module_id": "AAC",
         "user_id": "user_12345",
-        "objective_scores": [0.8, 0.7, 0.9, 0.6, 0.8],
-        "confidence_scores": [0.7, 0.6, 0.5, 0.2, 0.1],
-        "redo_topics": ["topic a", "topic b"],
-        "flagged_topics": ["topic b", "topic c"],
+        "objective_scores": [0.8, 0.7, 0.9, 0.6],
+        "confidence_scores": [0.7, 0.6, 0.5, 0.2],
+        "topics_covered": ["topic1", "topic2", "topic3", "topic4"],
+        "flagged_topics": ["topic2", "topic4"],
         "confidence_previous": [0.6, 0.7, 0.8, 0.3, 0.2],
         "skill_level": {"logic": 0.4, "coding": 0.6, "memory": 0.5},
         "learner_purpose": "revision",
@@ -173,11 +209,26 @@ def main():
     print(f"Average Objective Score: {sum(sample_input['objective_scores'])} / {len(sample_input['objective_scores'])} = {processed_features['avg_obj_score']}")
     print(f"Average Confidence Score: {sum(sample_input['confidence_scores'])} / {len(sample_input['confidence_scores'])} = {processed_features['avg_conf_score']}")
     print(f"Confidence Trend: Calculated from {len(sample_input['confidence_previous'])} previous scores = {processed_features['conf_trend']}")
-    print(f"Redo Topics Count: {len(sample_input['redo_topics'])} topics = {processed_features['redo_topics_count']}")
+    
+    # Show dynamic threshold calculation
+    all_scores = sample_input['objective_scores'] + sample_input['confidence_scores']
+    mean_score = statistics.mean(all_scores)
+    std_score = statistics.stdev(all_scores) if len(all_scores) > 1 else 0
+    dynamic_threshold = mean_score - (std_score / 2)
+    print(f"Dynamic Threshold: {mean_score:.3f} - ({std_score:.3f}/2) = {dynamic_threshold:.3f}")
+    print(f"Redo Topics: {processed_features['redo_topics']} (topics below threshold)")
+    print(f"Redo Topics Count: {len(processed_features['redo_topics'])} topics = {processed_features['redo_topics_count']}")
     print(f"Flagged Topics Count: {len(sample_input['flagged_topics'])} topics = {processed_features['flagged_topics_count']}")
     print(f"Average Time per Module: {sum(sample_input['time_module'])} / {len(sample_input['time_module'])} = {processed_features['avg_time_module']} seconds")
     
     return processed_features
 
+# New: Batch process all users from sample_users.json and save to processed_users.json
 if __name__ == "__main__":
-    main()
+    with open("sample_users.json", "r") as f:
+        sample_users = json.load(f)
+    preprocessor = DecisionTreePreprocessor()
+    processed_users = [preprocessor.preprocess_input(user) for user in sample_users]
+    with open("processed_users.json", "w") as f:
+        json.dump(processed_users, f, indent=2)
+    print(f"Batch processed {len(processed_users)} users and saved to processed_users.json")

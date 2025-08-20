@@ -52,31 +52,26 @@
       "confidence": 1.0
     },
     "learning_intervention": {
-      "intervention": "Alternative Explanations",
+      "intervention": "Core Practical",
       "confidence": 1.0,
-      "description": "Alternative explanations, step-by-step breakdown for quick struggling (overridden to long)"
+      "description": "Core concepts, practical exercises for average learners preferring short sessions"
     },
     "topic_priorities": {
       "current_priority_topics": {
-        "critical": [
-          "topic2"
-        ],
+        "critical": [],
         "high": [
-          "topic1"
+          "topic2"
         ]
       },
       "weakness_prompts": {
-        "critical": "User shows critical weakness in: topic2. These topics require immediate attention and will be reinforced across multiple modules.",
-        "high": "User shows high priority weakness in: topic1. These topics need focused review in the current module."
+        "high": "User shows high priority weakness in: topic2. These topics need focused review in the current module."
       },
       "topic_details": {
-        "critical_topics": [
+        "critical_topics": [],
+        "high_priority_topics": [
           "topic2"
         ],
-        "high_priority_topics": [
-          "topic1"
-        ],
-        "total_tracked": 2
+        "total_tracked": 1
       }
     }
   },
@@ -84,8 +79,8 @@
     "user_id": "U003",
     "module_id": "M3",
     "user_category": {
-      "mismatch_pattern": "Slow but Steady",
-      "personalization_strategy": "Patient progression, encouragement, extended timelines",
+      "mismatch_pattern": "Severe Impostor",
+      "personalization_strategy": "Intensive confidence therapy, achievement recognition",
       "confidence": 1.0,
       "skill_analysis": {
         "strongest_skill": "coding",
@@ -98,35 +93,28 @@
       "confidence": 1.0
     },
     "learning_intervention": {
-      "intervention": "Micro-learning",
+      "intervention": "Simple Step-by-Step",
       "confidence": 1.0,
-      "description": "Micro-learning, essential concepts only for critical struggling short sessions"
+      "description": "Simple language, step-by-step guides for slow learners preferring short sessions"
     },
     "topic_priorities": {
       "current_priority_topics": {
-        "critical": [
-          "topic2",
-          "topic5",
-          "topic4"
-        ],
+        "critical": [],
         "high": [
-          "topic3"
+          "topic3",
+          "topic2"
         ]
       },
       "weakness_prompts": {
-        "critical": "User shows critical weakness in: topic2, topic5, topic4. These topics require immediate attention and will be reinforced across multiple modules.",
-        "high": "User shows high priority weakness in: topic3. These topics need focused review in the current module."
+        "high": "User shows high priority weakness in: topic3, topic2. These topics need focused review in the current module."
       },
       "topic_details": {
-        "critical_topics": [
-          "topic2",
-          "topic5",
-          "topic4"
-        ],
+        "critical_topics": [],
         "high_priority_topics": [
-          "topic3"
+          "topic3",
+          "topic2"
         ],
-        "total_tracked": 4
+        "total_tracked": 2
       }
     }
   },
@@ -134,8 +122,8 @@
     "user_id": "U004",
     "module_id": "M4",
     "user_category": {
-      "mismatch_pattern": "Slow Starter",
-      "personalization_strategy": "Patience, building momentum, progressive difficulty",
+      "mismatch_pattern": "Performance-Practice Disconnect",
+      "personalization_strategy": "Study habit analysis, learning method review",
       "confidence": 1.0,
       "skill_analysis": {
         "strongest_skill": "memory",
@@ -155,30 +143,19 @@
     "topic_priorities": {
       "current_priority_topics": {
         "critical": [
-          "topic2",
-          "topic5",
-          "topic4",
-          "topic6"
+          "topic4"
         ],
-        "high": [
-          "topic7"
-        ]
+        "high": []
       },
       "weakness_prompts": {
-        "critical": "User shows critical weakness in: topic2, topic5, topic4, topic6. These topics require immediate attention and will be reinforced across multiple modules.",
-        "high": "User shows high priority weakness in: topic7. These topics need focused review in the current module."
+        "critical": "User shows critical weakness in: topic4. These topics require immediate attention and will be reinforced across multiple modules."
       },
       "topic_details": {
         "critical_topics": [
-          "topic2",
-          "topic5",
-          "topic4",
-          "topic6"
+          "topic4"
         ],
-        "high_priority_topics": [
-          "topic7"
-        ],
-        "total_tracked": 5
+        "high_priority_topics": [],
+        "total_tracked": 1
       }
     }
   },
@@ -186,8 +163,8 @@
     "user_id": "U005",
     "module_id": "M5",
     "user_category": {
-      "mismatch_pattern": "Slow but Steady",
-      "personalization_strategy": "Patient progression, encouragement, extended timelines",
+      "mismatch_pattern": "Severe Impostor",
+      "personalization_strategy": "Intensive confidence therapy, achievement recognition",
       "confidence": 1.0,
       "skill_analysis": {
         "strongest_skill": "memory",
@@ -200,41 +177,31 @@
       "confidence": 1.0
     },
     "learning_intervention": {
-      "intervention": "Micro-learning",
+      "intervention": "Simple Step-by-Step",
       "confidence": 1.0,
-      "description": "Micro-learning, essential concepts only for critical struggling short sessions"
+      "description": "Simple language, step-by-step guides for slow learners preferring short sessions"
     },
     "topic_priorities": {
       "current_priority_topics": {
         "critical": [
-          "topic5",
-          "topic4",
-          "topic6",
-          "topic11",
-          "topic9",
-          "topic10"
+          "topic4"
         ],
         "high": [
-          "topic8"
+          "topic5"
         ]
       },
       "weakness_prompts": {
-        "critical": "User shows critical weakness in: topic5, topic4, topic6, topic11, topic9, topic10. These topics require immediate attention and will be reinforced across multiple modules.",
-        "high": "User shows high priority weakness in: topic8. These topics need focused review in the current module."
+        "critical": "User shows critical weakness in: topic4. These topics require immediate attention and will be reinforced across multiple modules.",
+        "high": "User shows high priority weakness in: topic5. These topics need focused review in the current module."
       },
       "topic_details": {
         "critical_topics": [
-          "topic5",
-          "topic4",
-          "topic6",
-          "topic11",
-          "topic9",
-          "topic10"
+          "topic4"
         ],
         "high_priority_topics": [
-          "topic8"
+          "topic5"
         ],
-        "total_tracked": 7
+        "total_tracked": 2
       }
     }
   }

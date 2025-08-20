@@ -1,0 +1,114 @@
+[
+  {
+    "module_id": "M1",
+    "user_id": "U001",
+    "avg_obj_score": 0.85,
+    "avg_conf_score": 0.85,
+    "conf_trend": 0.75,
+    "redo_topics_count": 0,
+    "flagged_topics_count": 0,
+    "redo_topics": [],
+    "flagged_topics": [],
+    "skill_level": {
+      "logic": 0.8,
+      "coding": 0.9,
+      "memory": 0.85
+    },
+    "learner_purpose": "revision",
+    "desired_proficiency": "advanced",
+    "session_preference": "long",
+    "avg_time_module": 410.0
+  },
+  {
+    "module_id": "M2",
+    "user_id": "U002",
+    "avg_obj_score": 0.6,
+    "avg_conf_score": 0.65,
+    "conf_trend": 0.75,
+    "redo_topics_count": 0,
+    "flagged_topics_count": 1,
+    "redo_topics": [],
+    "flagged_topics": [
+      "topic2"
+    ],
+    "skill_level": {
+      "logic": 0.6,
+      "coding": 0.65,
+      "memory": 0.7
+    },
+    "learner_purpose": "scratch",
+    "desired_proficiency": "intermediate",
+    "session_preference": "short",
+    "avg_time_module": 650.0
+  },
+  {
+    "module_id": "M3",
+    "user_id": "U003",
+    "avg_obj_score": 0.35,
+    "avg_conf_score": 0.45,
+    "conf_trend": -0.5,
+    "redo_topics_count": 0,
+    "flagged_topics_count": 2,
+    "redo_topics": [],
+    "flagged_topics": [
+      "topic2",
+      "topic3"
+    ],
+    "skill_level": {
+      "logic": 0.4,
+      "coding": 0.5,
+      "memory": 0.45
+    },
+    "learner_purpose": "scratch",
+    "desired_proficiency": "basic",
+    "session_preference": "short",
+    "avg_time_module": 1250.0
+  },
+  {
+    "module_id": "M4",
+    "user_id": "U004",
+    "avg_obj_score": 0.695,
+    "avg_conf_score": 0.487,
+    "conf_trend": -0.5,
+    "redo_topics_count": 1,
+    "flagged_topics_count": 1,
+    "redo_topics": [
+      "topic4"
+    ],
+    "flagged_topics": [
+      "topic4"
+    ],
+    "skill_level": {
+      "logic": 0.7,
+      "coding": 0.75,
+      "memory": 0.8
+    },
+    "learner_purpose": "revision",
+    "desired_proficiency": "intermediate",
+    "session_preference": "long",
+    "avg_time_module": 825.0
+  },
+  {
+    "module_id": "M5",
+    "user_id": "U005",
+    "avg_obj_score": 0.44,
+    "avg_conf_score": 0.32,
+    "conf_trend": -0.5,
+    "redo_topics_count": 0,
+    "flagged_topics_count": 2,
+    "redo_topics": [],
+    "flagged_topics": [
+      "topic4",
+      "topic5"
+    ],
+    "skill_level": {
+      "logic": 0.5,
+      "coding": 0.55,
+      "memory": 0.6
+    },
+    "learner_purpose": "scratch",
+    "desired_proficiency": "basic",
+    "session_preference": "short",
+    "avg_time_module": 1066.0
+  }
+]
