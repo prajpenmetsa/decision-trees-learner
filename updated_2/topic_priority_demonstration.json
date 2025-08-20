@@ -1,0 +1,262 @@
+[
+  {
+    "module": "M1_Intro_Programming",
+    "user_id": "student_001",
+    "input": {
+      "redo_topics": [
+        "variables",
+        "loops"
+      ],
+      "flagged_topics": [
+        "loops",
+        "functions"
+      ]
+    },
+    "analysis": {
+      "current_priority_topics": {
+        "critical": [
+          "loops"
+        ],
+        "high": []
+      },
+      "weakness_prompts": {
+        "critical": "User shows critical weakness in: loops. These topics require immediate attention and will be reinforced across multiple modules."
+      },
+      "topic_tracker_details": {
+        "loops": {
+          "priority": "critical",
+          "remaining_modules": 1,
+          "first_seen_module": "M1_Intro_Programming"
+        }
+      },
+      "module_history": [
+        {
+          "module_id": "M1_Intro_Programming",
+          "critical": [
+            "loops"
+          ],
+          "high": [
+            "functions",
+            "variables"
+          ]
+        }
+      ],
+      "total_tracked_topics": 1
+    }
+  },
+  {
+    "module": "M2_Data_Structures",
+    "user_id": "student_001",
+    "input": {
+      "redo_topics": [
+        "arrays"
+      ],
+      "flagged_topics": [
+        "dictionaries"
+      ]
+    },
+    "analysis": {
+      "current_priority_topics": {
+        "critical": [
+          "loops"
+        ],
+        "high": []
+      },
+      "weakness_prompts": {
+        "critical": "User shows critical weakness in: loops. These topics require immediate attention and will be reinforced across multiple modules."
+      },
+      "topic_tracker_details": {
+        "loops": {
+          "priority": "critical",
+          "remaining_modules": 1,
+          "first_seen_module": "M1_Intro_Programming"
+        }
+      },
+      "module_history": [
+        {
+          "module_id": "M1_Intro_Programming",
+          "critical": [
+            "loops"
+          ],
+          "high": [
+            "functions",
+            "variables"
+          ]
+        },
+        {
+          "module_id": "M2_Data_Structures",
+          "critical": [],
+          "high": [
+            "arrays",
+            "dictionaries"
+          ]
+        }
+      ],
+      "total_tracked_topics": 1
+    }
+  },
+  {
+    "module": "M3_Algorithms",
+    "user_id": "student_001",
+    "input": {
+      "redo_topics": [
+        "sorting",
+        "loops"
+      ],
+      "flagged_topics": [
+        "loops",
+        "searching"
+      ]
+    },
+    "analysis": {
+      "current_priority_topics": {
+        "critical": [
+          "loops"
+        ],
+        "high": []
+      },
+      "weakness_prompts": {
+        "critical": "User shows critical weakness in: loops. These topics require immediate attention and will be reinforced across multiple modules."
+      },
+      "topic_tracker_details": {
+        "loops": {
+          "priority": "critical",
+          "remaining_modules": 0,
+          "first_seen_module": "M3_Algorithms"
+        }
+      },
+      "module_history": [
+        {
+          "module_id": "M1_Intro_Programming",
+          "critical": [
+            "loops"
+          ],
+          "high": [
+            "functions",
+            "variables"
+          ]
+        },
+        {
+          "module_id": "M2_Data_Structures",
+          "critical": [],
+          "high": [
+            "arrays",
+            "dictionaries"
+          ]
+        },
+        {
+          "module_id": "M3_Algorithms",
+          "critical": [
+            "loops"
+          ],
+          "high": [
+            "sorting",
+            "searching"
+          ]
+        }
+      ],
+      "total_tracked_topics": 1
+    }
+  },
+  {
+    "module": "M4_Advanced_Topics",
+    "user_id": "student_001",
+    "input": {
+      "redo_topics": [],
+      "flagged_topics": [
+        "recursion"
+      ]
+    },
+    "analysis": {
+      "current_priority_topics": {
+        "critical": [
+          "loops"
+        ],
+        "high": []
+      },
+      "weakness_prompts": {
+        "critical": "User shows critical weakness in: loops. These topics require immediate attention and will be reinforced across multiple modules."
+      },
+      "topic_tracker_details": {
+        "loops": {
+          "priority": "critical",
+          "remaining_modules": 0,
+          "first_seen_module": "M3_Algorithms"
+        }
+      },
+      "module_history": [
+        {
+          "module_id": "M2_Data_Structures",
+          "critical": [],
+          "high": [
+            "arrays",
+            "dictionaries"
+          ]
+        },
+        {
+          "module_id": "M3_Algorithms",
+          "critical": [
+            "loops"
+          ],
+          "high": [
+            "sorting",
+            "searching"
+          ]
+        },
+        {
+          "module_id": "M4_Advanced_Topics",
+          "critical": [],
+          "high": [
+            "recursion"
+          ]
+        }
+      ],
+      "total_tracked_topics": 1
+    }
+  },
+  {
+    "module": "M5_Final_Review",
+    "user_id": "student_001",
+    "input": {
+      "redo_topics": [
+        "objects"
+      ],
+      "flagged_topics": []
+    },
+    "analysis": {
+      "current_priority_topics": {
+        "critical": [],
+        "high": []
+      },
+      "weakness_prompts": {},
+      "topic_tracker_details": {},
+      "module_history": [
+        {
+          "module_id": "M3_Algorithms",
+          "critical": [
+            "loops"
+          ],
+          "high": [
+            "sorting",
+            "searching"
+          ]
+        },
+        {
+          "module_id": "M4_Advanced_Topics",
+          "critical": [],
+          "high": [
+            "recursion"
+          ]
+        },
+        {
+          "module_id": "M5_Final_Review",
+          "critical": [],
+          "high": [
+            "objects"
+          ]
+        }
+      ],
+      "total_tracked_topics": 0
+    }
+  }
+]

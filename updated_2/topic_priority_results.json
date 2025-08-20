@@ -1,0 +1,178 @@
+[
+  {
+    "user_id": "user_001",
+    "module_id": "M1",
+    "topic_priorities": {
+      "current_priority_topics": {
+        "critical": [
+          "topic_b"
+        ],
+        "high": []
+      },
+      "weakness_prompts": {
+        "critical": "User shows critical weakness in: topic_b. These topics require immediate attention and will be reinforced across multiple modules."
+      },
+      "topic_tracker_details": {
+        "topic_b": {
+          "priority": "critical",
+          "remaining_modules": 0,
+          "first_seen_module": "M1"
+        }
+      },
+      "module_history": [
+        {
+          "module_id": "M1",
+          "critical": [
+            "topic_b"
+          ],
+          "high": [
+            "topic_c",
+            "topic_a"
+          ]
+        }
+      ],
+      "total_tracked_topics": 1
+    }
+  },
+  {
+    "user_id": "user_001",
+    "module_id": "M2",
+    "topic_priorities": {
+      "current_priority_topics": {
+        "critical": [
+          "topic_b",
+          "topic_d"
+        ],
+        "high": []
+      },
+      "weakness_prompts": {
+        "critical": "User shows critical weakness in: topic_b, topic_d. These topics require immediate attention and will be reinforced across multiple modules."
+      },
+      "topic_tracker_details": {
+        "topic_b": {
+          "priority": "critical",
+          "remaining_modules": 0,
+          "first_seen_module": "M1"
+        },
+        "topic_d": {
+          "priority": "critical",
+          "remaining_modules": 0,
+          "first_seen_module": "M2"
+        }
+      },
+      "module_history": [
+        {
+          "module_id": "M1",
+          "critical": [
+            "topic_b"
+          ],
+          "high": [
+            "topic_c",
+            "topic_a"
+          ]
+        },
+        {
+          "module_id": "M2",
+          "critical": [
+            "topic_d"
+          ],
+          "high": [
+            "topic_a"
+          ]
+        }
+      ],
+      "total_tracked_topics": 2
+    }
+  },
+  {
+    "user_id": "user_001",
+    "module_id": "M3",
+    "topic_priorities": {
+      "current_priority_topics": {
+        "critical": [
+          "topic_d"
+        ],
+        "high": []
+      },
+      "weakness_prompts": {
+        "critical": "User shows critical weakness in: topic_d. These topics require immediate attention and will be reinforced across multiple modules."
+      },
+      "topic_tracker_details": {
+        "topic_d": {
+          "priority": "critical",
+          "remaining_modules": 0,
+          "first_seen_module": "M2"
+        }
+      },
+      "module_history": [
+        {
+          "module_id": "M1",
+          "critical": [
+            "topic_b"
+          ],
+          "high": [
+            "topic_c",
+            "topic_a"
+          ]
+        },
+        {
+          "module_id": "M2",
+          "critical": [
+            "topic_d"
+          ],
+          "high": [
+            "topic_a"
+          ]
+        },
+        {
+          "module_id": "M3",
+          "critical": [],
+          "high": [
+            "topic_f",
+            "topic_e"
+          ]
+        }
+      ],
+      "total_tracked_topics": 1
+    }
+  },
+  {
+    "user_id": "user_001",
+    "module_id": "M4",
+    "topic_priorities": {
+      "current_priority_topics": {
+        "critical": [],
+        "high": []
+      },
+      "weakness_prompts": {},
+      "topic_tracker_details": {},
+      "module_history": [
+        {
+          "module_id": "M2",
+          "critical": [
+            "topic_d"
+          ],
+          "high": [
+            "topic_a"
+          ]
+        },
+        {
+          "module_id": "M3",
+          "critical": [],
+          "high": [
+            "topic_f",
+            "topic_e"
+          ]
+        },
+        {
+          "module_id": "M4",
+          "critical": [],
+          "high": [
+            "topic_g"
+          ]
+        }
+      ],
+      "total_tracked_topics": 0
+    }
+  }
+]
